@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { auth_user } from './firebase'
+
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+import moment from 'moment'
 import './assets/scss/app.scss'
 import { FontAwesomeIcon } from '@/plugins/font-awesome'
 
@@ -12,6 +17,7 @@ auth_user.onAuthStateChanged(user => {
         app = createApp(App)
             .use(store)
             .use(router)
+            .use(VueAxios, axios)
             .component('fa', FontAwesomeIcon)
             .mount('#app')
     }

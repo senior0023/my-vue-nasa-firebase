@@ -41,7 +41,7 @@ header {
   position: relative;
   box-shadow: 0 0 5px 0 rgba(52, 73, 94, 0.5);
   z-index: 10;
-  width: 30vw;
+  width: 20vw;
   height: 100vh;
   background: $primary;
 
@@ -83,8 +83,51 @@ header {
 }
 
 .page {
-  width: 70vw;
+  width: 80vw;
   padding: 3rem;
+
+  .page-header {
+    padding: 1rem;
+    margin-top: 5rem;
+    font-weight: bold;
+  }
+
+  .styled-table {
+    cursor: pointer;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead tr {
+      background-color: $primary;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid $primary;
+    }
+
+    tbody tr:hover {
+      font-weight: bold;
+      color: $primary;
+    }
+
+    th, td {
+      padding: 12px 15px;
+    }
+  }
 }
 
 // login
