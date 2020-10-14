@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    Home
+    Asteroids
   </div>
 </template>
 
