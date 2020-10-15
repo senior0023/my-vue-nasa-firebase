@@ -5,6 +5,8 @@
     </h2>
     <div class="search">
     </div>
+    <!-- Date picker -->
+    <date-picker />
     <!-- table part -->
     <div class="table">
       <table class="styled-table">
@@ -33,44 +35,49 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      datas: [],
-      loading: false
-    }
-  },
-  computed() {
-
-  },
-  created() {
-    this.getAsteroids()
-  },
-  methods: {
-    getAsteroids() {
-      //set loading spinner
-      this.loading = true
-      // fetch 10 asteroids data
-      let params = {
-        page: 0,
-        size: 10,
-        api_key: 'eIwAfFIAzJ8ChGli7AQGapj9CnLjZCVUoUYMNH5S'
+  import DatePicker from '@/components/DatePicker.vue'
+  
+  export default {
+    data() {
+      return {
+        datas: [],
+        loading: false
       }
+    },
+    computed() {
 
-      this.axios.get('https://api.nasa.gov/neo/rest/v1/neo/browse', {params: params})
-        .then((response) => {
-          this.datas = response.data.near_earth_objects
-          console.log('datas: ', this.datas)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-        .finally(() => {
-          this.loading = false
-        })
+    },
+    created() {
+      this.getAsteroids()
+    },
+    components: {
+      DatePicker
+    },
+    methods: {
+      getAsteroids() {
+        //set loading spinner
+        this.loading = true
+        // fetch 10 asteroids data
+        let params = {
+          page: 0,
+          size: 10,
+          api_key: 'eIwAfFIAzJ8ChGli7AQGapj9CnLjZCVUoUYMNH5S'
+        }
+
+        this.axios.get('https://api.nasa.gov/neo/rest/v1/neo/browse', {params: params})
+          .then((response) => {
+            this.datas = response.data.near_earth_objects
+            console.log('datas: ', this.datas)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+          .finally(() => {
+            this.loading = false
+          })
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
