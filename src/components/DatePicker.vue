@@ -1,7 +1,7 @@
 <template>
-    <div class="date-picker">
+    <div>
         <div class="custom-select">
-            <select>
+            <select @change="editValue('month', $event)" ref="month">
                 <option
                     v-for="(month, index) in months"
                     :key="month"
@@ -11,7 +11,7 @@
             </select>
         </div>
         <div class="custom-select">
-            <select>
+            <select @change="editValue('date', $event)" ref="date">
                 <option
                     v-for="i in daysInMonth"
                     :key="i"
@@ -21,7 +21,7 @@
             </select>
         </div>
         <div class="custom-select">
-            <select>
+            <select @change="editValue('year', $event)" ref="year">
                 <option
                     v-for="i in numberOfYears"
                     :key="i"
@@ -39,15 +39,42 @@
 
     export default {
         setup(props, context) {
+            const month = ref(null)
+            const date = ref(null)
+            const year = ref(null)
+
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-            const startingYear = 2010
-            const numberOfYears = 20
+            const startingYear = 1900
+            const numberOfYears = 500
 
             const dateValue = moment() // defaults to current date
             const daysInMonth = ref(dateValue.daysInMonth())
 
+            // set the current date to reflect the change of select option
+            const editValue = (unit, evt) => {
+                dateValue.set(unit, evt.target.value)
+                daysInMonth.value = dateValue.daysInMonth()
+                updateElements()
+                context.emit('update', dateValue.format('YYYY-MM-DD'))
+            }
+            // update the ref values based on the dateValue
+            const updateElements = () => {
+                // month.value gives us the <select>
+                month.value.value = dateValue.month()
+                date.value.value = dateValue.date()
+                year.value.value = dateValue.format('YYYY')
+            }
+
+            onMounted(() => {
+                updateElements()
+            })
+
             return {
+                month,
+                date,
+                year,
+                editValue,
                 daysInMonth,
                 months,
                 numberOfYears,
@@ -60,7 +87,7 @@
 <style scoped>
     /* wrapper-div for including arrow */
     .custom-select {
-        background-color: #eee;
+        background-color: #30A0EE;
         float: left;
         margin-right: 10px;
         position: relative;    
@@ -72,7 +99,7 @@
         appearance: none; /* remove default styling */
         background-color: inherit;
         border: none;
-        color: #333;
+        color: white;
         display: block;
         font-size: 16px;
         height: 32px;

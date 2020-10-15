@@ -17,20 +17,23 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
-    path: '/asteroids',
-    name: 'Asteroids',
+    path: '/nasa_browse',
+    name: 'NASA Browse',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Asteroids.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/NasaBrowse.vue'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/settings',
-    name: 'Settings',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Settings.vue'),
+    path: '/nasa_feeds',
+    name: 'NASA Feeds',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/NasaFeed.vue'),
     meta: {
       requiresAuth: true
     }

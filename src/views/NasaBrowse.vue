@@ -1,12 +1,9 @@
 <template>
   <div class="page">
     <h2 class="page-header">
-      Asteroids List - NASA NEO(Nearth Earth Object)
+      NASA Browse - NASA NEO(Nearth Earth Object)
     </h2>
-    <div class="search">
-    </div>
-    <!-- Date picker -->
-    <date-picker />
+    <p v-if="showErrorMsg" class="error">{{ showErrorMsg }}</p>
     <!-- table part -->
     <div class="table">
       <table class="styled-table">
@@ -35,13 +32,13 @@
 </template>
 
 <script>
-  import DatePicker from '@/components/DatePicker.vue'
-  
   export default {
     data() {
       return {
         datas: [],
-        loading: false
+        loading: false,
+        api_key: 'eIwAfFIAzJ8ChGli7AQGapj9CnLjZCVUoUYMNH5S',
+        showErrorMsg: null
       }
     },
     computed() {
@@ -50,10 +47,8 @@
     created() {
       this.getAsteroids()
     },
-    components: {
-      DatePicker
-    },
     methods: {
+      // Neo Browse
       getAsteroids() {
         //set loading spinner
         this.loading = true
@@ -61,7 +56,7 @@
         let params = {
           page: 0,
           size: 10,
-          api_key: 'eIwAfFIAzJ8ChGli7AQGapj9CnLjZCVUoUYMNH5S'
+          api_key: this.api_key
         }
 
         this.axios.get('https://api.nasa.gov/neo/rest/v1/neo/browse', {params: params})
@@ -69,8 +64,8 @@
             this.datas = response.data.near_earth_objects
             console.log('datas: ', this.datas)
           })
-          .catch(error => {
-            console.log(error)
+          .catch(err => {
+            this.showErrorMsg = err.response.data.error_message
           })
           .finally(() => {
             this.loading = false
@@ -81,5 +76,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>

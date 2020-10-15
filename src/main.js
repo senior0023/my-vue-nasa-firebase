@@ -7,7 +7,6 @@ import { auth_user } from './firebase'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-import moment from 'moment'
 import './assets/scss/app.scss'
 import { FontAwesomeIcon } from '@/plugins/font-awesome'
 
