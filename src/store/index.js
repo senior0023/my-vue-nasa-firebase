@@ -10,6 +10,9 @@ const store = new Vuex.Store({
   state: {
     userProfile: {},
     authErrorMsg: '',
+    addFavoriteMsg: '',
+    favoritesErrorMsg: '',
+    favorites: []
   },
   mutations: {
     setUserProfile(state, val) {
@@ -17,6 +20,15 @@ const store = new Vuex.Store({
     },
     setAuthErrorMsg(state, val) {
       state.authErrorMsg = val
+    },
+    setAddFavoriteMsg(state, val) {
+      state.addFavoriteMsg = val
+    },
+    setFavorites(state, val) {
+      state.favorites = val
+    },
+    setFavoritesErrorMsg(state, val) {
+      state.favoritesErrorMsg = val
     }
   },
   actions: {
@@ -35,9 +47,10 @@ const store = new Vuex.Store({
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
       const userProfile = await firebase.usersCollection.doc(user.uid).get()
-
+      let data = userProfile.data()
+      data.uid = user.uid
       // set user profile in state
-      commit('setUserProfile', userProfile.data())
+      commit('setUserProfile', data)
 
       // change route to home from login
       if (router.currentRoute.value.path === '/login') {
@@ -69,6 +82,46 @@ const store = new Vuex.Store({
       commit('setUserProfile', {})
       
       router.push('/login')
+    },
+
+    async add_to_favorites({ commit }, data) {
+      try {
+        commit('setAddFavoriteMsg', '')
+        // get already existed document
+        let item = null; 
+        const snapshot = await firebase.asteroidsCollection.where("name", "==", data.name).where("user_id", "==", data.user_id).limit(1).get()
+        snapshot.forEach((doc) => {
+          item = doc.data()
+        })
+        if (item == null) {
+          // add Neo asteroid data to 'asteroids' collection
+          await firebase.asteroidsCollection.doc(data.name).set(data)
+        } else {
+          commit('setAddFavoriteMsg', 'This data is alreay existed.')
+        }
+      } catch(err) {
+        commit('setAddFavoriteMsg', err.message)
+      }
+    },
+
+    async fetchFavorites({ commit }) {
+      try {
+        console.log('store:', store.state.userProfile)
+        // get my favorite data
+        let favorites = []
+        const snapshot = await firebase.asteroidsCollection.get()
+        snapshot.forEach(doc => {
+          let favorite = doc.data()
+          favorite.id = doc.id
+
+          favorites.push(favorite)
+        })
+
+        commit('setFavorites', favorites)
+      } catch(err) {
+        console.log('err: ', err.message)
+        commit('setFavoritesErrorMsg', err.message)
+      }
     }
   }
 })

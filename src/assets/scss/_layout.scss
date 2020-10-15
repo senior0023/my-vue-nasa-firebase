@@ -94,6 +94,7 @@ header {
   }
 
   .styled-table {
+    text-align: center;
     cursor: pointer;
     border-collapse: collapse;
     margin: 25px 0;
@@ -105,7 +106,7 @@ header {
     thead tr {
       background-color: $primary;
       color: #ffffff;
-      text-align: left;
+      text-align: center;
     }
 
     tbody {

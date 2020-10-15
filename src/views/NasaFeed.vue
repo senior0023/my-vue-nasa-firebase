@@ -1,5 +1,8 @@
 <template>
   <div class="page">
+    <div v-if="loading" class="loading">
+      <p>Loading...</p>
+    </div>
     <h2 class="page-header">
       NASA Feed List
     </h2>
@@ -128,12 +131,6 @@
     display: flex;
     flex-grow: 1;  
   }
-
-  p {
-    line-height: 2;
-    margin-right: 5px;
-  }
-
   /* wrapper-div for including arrow */
     .custom-select {
         background-color: #30A0EE;

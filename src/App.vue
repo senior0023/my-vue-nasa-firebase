@@ -3,7 +3,7 @@
     <navigation v-if="showNav"></navigation>
     <div class="setting">
       <p>{{ userProfile.name }}</p>
-      <a @click="logout()">Logout</a>
+      <a @click="logout()"><p class="logout">Logout</p><fa icon="angle-right" class="icon"></fa></a>
     </div>
     <router-view/>
   </div>
@@ -52,6 +52,16 @@
     a {
       position: relative;
       top: 30px;
+
+      .logout {
+        position: absolute;
+        right: 25px;
+        top: 8px;
+      }
+
+      .icon {
+        width: 20px;
+      }
     }
   }
 </style>
