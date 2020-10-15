@@ -72,6 +72,7 @@
       getAsteroids() {
         // clear error msg
         this.showErrorMsg = ''
+        this.addFavoriteMsg = ''
         //set loading spinner
         this.loading = true
         // fetch 10 asteroids data
@@ -95,6 +96,7 @@
       searchNeoById() {
         // clear error msg
         this.showErrorMsg = ''
+        this.addFavoriteMsg = ''
 
         this.datas = []
         // set loading spinner

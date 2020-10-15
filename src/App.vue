@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navigation v-if="showNav"></navigation>
-    <div class="setting">
+    <div v-if="showNav" class="setting">
       <p>{{ userProfile.name }}</p>
       <a @click="logout()"><p class="logout">Logout</p><fa icon="angle-right" class="icon"></fa></a>
     </div>
@@ -22,6 +22,11 @@
       ...mapState(['userProfile']),
       showNav() {
         return Object.keys(this.userProfile).length > 0 ? true : false
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout')
       }
     }
   }
