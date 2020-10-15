@@ -2,6 +2,7 @@
   <div class="main">
     <div class="sidebar">
       <div class="header">
+        <img src="@/assets/logo.png" class="header-logo"/>
         <router-link to="/">
           <h3>NASA Vue</h3>
         </router-link>
@@ -19,9 +20,6 @@
           </li>
         </ul>
       </div>
-      <div class="footer">
-        <a @click="logout()">Logout</a>
-      </div>
     </div>
   </div>
 </template>
@@ -35,3 +33,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .header-logo {
+    width: 100%;
+    height: auto;
+  }
+</style>

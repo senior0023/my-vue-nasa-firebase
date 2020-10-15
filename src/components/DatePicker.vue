@@ -91,6 +91,7 @@
         float: left;
         margin-right: 10px;
         position: relative;    
+        margin-bottom: 10px;
     }
 
     .custom-select select {

@@ -13,7 +13,7 @@
     </div>
     <!-- Select a specific date -->
     <p>Select data to see a list of asteroids based on their closest approach date to Earth: </p>
-    <div class="custom-select custom-select-margin">
+    <div class="custom-select">
         <select @change="dateSelected($event)">
             <option
                 v-for="(item, index) in dates"
@@ -139,7 +139,8 @@
         background-color: #30A0EE;
         float: left;
         margin-right: 10px;
-        position: relative;    
+        position: relative;
+        margin-bottom: 10px;    
     }
 
     .custom-select select {
@@ -165,9 +166,5 @@
         position: absolute;
         right: 8px;
         top: 10px;
-    }
-
-    .custom-select-margin {
-        margin-bottom: 10px;
     }
 </style>

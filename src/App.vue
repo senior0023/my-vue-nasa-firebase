@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <navigation v-if="showNav"></navigation>
+    <div class="setting">
+        <a @click="logout()">Logout</a>
+      </div>
     <router-view/>
   </div>
 </template>
@@ -22,9 +25,24 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
   #app {
     display: flex;
     flex-direction: row;
+  }
+
+  .setting {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    text-align: right;
+    padding-right: 2rem;
+    background: white;
+    z-index: 1;
+    
+    a {
+      position: relative;
+      top: 55px;
+    }
   }
 </style>
