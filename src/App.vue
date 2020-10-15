@@ -2,8 +2,9 @@
   <div id="app">
     <navigation v-if="showNav"></navigation>
     <div class="setting">
-        <a @click="logout()">Logout</a>
-      </div>
+      <p>{{ userProfile.name }}</p>
+      <a @click="logout()">Logout</a>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -13,6 +14,7 @@
   import Navigation from '@/components/Navigation'
 
   export default {
+    
     components: {
       Navigation
     },
@@ -39,10 +41,17 @@
     padding-right: 2rem;
     background: white;
     z-index: 1;
-    
+    display: flex;
+    flex-direction: column;
+
+    p {
+      top: 25px;
+      position: relative;
+    }
+
     a {
       position: relative;
-      top: 55px;
+      top: 30px;
     }
   }
 </style>
